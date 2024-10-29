@@ -6,13 +6,13 @@ export default async function handler(req, res) {
         const eventData = {
             emailHash: req.body.emailHash, // Hash SHA256 del correo electrónico
             customData: {
-                currency: 'USD', // Cambia según sea necesario
-                value: req.body.value || 100.0 // Valor de ejemplo
+                currency: 'USD', // Cambia según sea necesario, o elimínalo si no es relevante
+                value: req.body.value || 0 // Otras configuraciones específicas para "Contactar"
             }
         };
 
-        // Llamar a la función sendEvent con el nombre del evento
-        const result = await sendEvent('Purchase', eventData);
+        // Aquí cambiamos "Purchase" a "Contact"
+        const result = await sendEvent('Contact', eventData);
 
         res.status(200).json(result); // Responder con el resultado
     } else {
