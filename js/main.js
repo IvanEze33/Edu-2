@@ -32,6 +32,23 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
             return false;
         }
+import CryptoJS from 'crypto-js';
+
+const sendConversionEvent = async (email) => {
+    const hashedEmail = CryptoJS.SHA256(email).toString();
+    await fetch('/api/trackEvent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ emailHash: hashedEmail, value: 0 }) 
+    });
+};
+
+document.getElementById("contactForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    sendConversionEvent(email);
+});
+
 
         const phone = '5491132355049';      
 let msg = ' 🍀 ¡Hola! Quiero mi usuario y el bonus de bienvenida:\n';
