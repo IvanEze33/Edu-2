@@ -1,4 +1,4 @@
-// Dependencia de fetch para solicitudes HTTP
+
 const fetch = require('node-fetch');
 
 // Variables de entorno para el ID del Pixel y el Token de Acceso, configuradas en Vercel y GitHub
@@ -6,10 +6,10 @@ const FACEBOOK_PIXEL_ID = process.env.FACEBOOK_PIXEL_ID;
 const ACCESS_TOKEN = process.env.FACEBOOK_ACCESS_TOKEN;
 
 async function sendEvent(eventName, eventData) {
-    // Endpoint de la API de Conversiones
+
     const url = `https://graph.facebook.com/v14.0/${FACEBOOK_PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
     
-    // Construir el payload del evento
+
     const payload = {
         data: [
             {
@@ -24,14 +24,13 @@ async function sendEvent(eventName, eventData) {
         ]
     };
 
-    // Enviar el evento a la API
     const response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
     });
 
-    // Retornar la respuesta de la API de Conversiones
+
     const responseBody = await response.json();
     return responseBody;
 }
